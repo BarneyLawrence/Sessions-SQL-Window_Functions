@@ -1,0 +1,7 @@
+Intro + Aggregates = 7:45
+Ranking = 5
+Analytic = 4
+Rows & Range = 8
+WHERE = 6
+Patterns = 9
+Performance = 9
