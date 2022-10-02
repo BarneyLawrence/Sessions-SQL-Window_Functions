@@ -1,0 +1,37 @@
+DROP TABLE IF EXISTS #MyData;
+
+SELECT 
+Colour,No
+INTO #MyData
+FROM
+(
+VALUES
+(1,'Red'),
+(2,NULL),
+(3,'Blue'),
+(4,NULL),
+(5,'Red'),
+(6,'Blue'),
+(7,NULL),
+(8,NULL),
+(9,'Green'),
+(10,NULL),
+(11,NULL),
+(12,NULL),
+(13,'Blue'),
+(14,NULL)
+) MyData(No,Colour);
+
+SELECT No, Colour,
+LAST_VALUE(Colour) 
+	OVER MyWindow AS LAST_VALUE,
+LAST_VALUE(Colour) IGNORE NULLS
+	OVER MyWindow AS LAST_VALUE_IGNORE_NULLS
+FROM #MyData
+WINDOW 
+MyWindow AS (
+		ORDER BY No
+		ROWS BETWEEN
+			UNBOUNDED PRECEDING
+			AND CURRENT ROW
+		)
